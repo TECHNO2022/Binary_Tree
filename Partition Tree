@@ -1,0 +1,68 @@
+//Given the root to a binary tree root, return a list of two numbers where the first number is the number of leaves in the tree and the second number is the number of internal (non-leaf) nodes.
+
+
+class Solution {
+
+//total_nodes
+    public int total_nodes(Tree root)
+    
+    {
+        List<Integer> list=new ArrayList<>();
+        Stack<Tree> stack=new Stack<>();
+        while(true)
+        {
+            if(root!=null)
+            {
+                stack.push(root);
+                root=root.left;
+
+            }
+            else
+            {
+                if(stack.isEmpty())
+                break;
+                root=stack.pop();
+                list.add(root.val);
+                root=root.right;
+            }
+        }
+
+        return list.size();
+    }
+        //leaves_nodes;
+        int c=0;
+
+    public int leaves_node(Tree root)
+    {   
+        if(root!=null)
+        {
+        if(root.left==null && root.right==null)
+        c++;
+        
+        else
+        {
+        if(root.left!=null)
+        leaves_node(root.left);
+        if(root.right!=null)
+        leaves_node(root.right);
+        }
+        }
+
+        return c;
+
+    }
+    public int[] solve(Tree root) {
+
+
+        int ans[]=new int[2];
+        ans[0]=leaves_node(root);
+        ans[1]=total_nodes(root)-ans[0];
+
+return ans;
+
+        //internal_nodes;
+
+
+        
+    }
+}
