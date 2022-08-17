@@ -1,0 +1,19 @@
+//Given two binary trees, root0 and root1, return whether their structure and values are equal.
+
+
+class Solution {
+    public boolean solve(Tree root0, Tree root1) {
+
+
+        if(root0==null && root1==null)
+        return true;
+        if((root0==null && root1!=null) || (root0!=null && root1==null))
+        return false;
+        if(root0.val!=root1.val)
+        return false;
+        
+            return root0.val==root1.val && solve(root0.left,root1.left) && solve(root0.right,root1.right);
+        
+        
+    }
+}
