@@ -1,0 +1,34 @@
+//Given a binary tree root, return whether all values in the tree are the same.
+
+class Solution {
+    public boolean solve(Tree root) {
+
+     Set<Integer> set=new HashSet<>();
+     Stack<Tree> stack=new Stack<>();
+
+
+     while(true)
+     {
+         if(root!=null)
+         {
+           stack.push(root);
+           root=root.left;
+         }
+         else
+         {
+             if(stack.isEmpty())
+             break;
+         
+               root=stack.pop();
+             set.add(root.val);
+             root=root.right;
+         }
+     }
+          System.out.println(set);
+
+     
+if(set.size()==1)
+return true;
+return  false;      
+    }
+}
