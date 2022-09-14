@@ -1,0 +1,45 @@
+
+//Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome.
+
+//Return the number of pseudo-palindromic paths going from the root node to leaf nodes.
+
+class Solution {
+    public int pseudoPalindromicPaths (TreeNode root) {
+        
+        int digits[]=new int[10];
+        Arrays.fill(digits,0);
+        int d[]=new int[1];
+        
+        dfs(root,digits,d);
+        return d[0];
+    }
+    
+    public void dfs(TreeNode root,int digits[],int d[])
+    {
+        if(root==null)
+            return ;
+        
+        digits[root.val]++;
+        dfs(root.left,digits,d);
+        dfs(root.right,digits,d);
+        if(root.left==null && root.right==null)
+        {                
+            int c=0;
+
+            for(int i=0;i<=9;i++)
+            {
+                if(digits[i]%2!=0)
+                {
+                    c++;
+                }
+                
+            
+            }
+            if(c==0 || c==1)
+                d[0]++;
+        }
+                digits[root.val]--;
+
+
+    }
+}
