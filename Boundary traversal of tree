@@ -1,0 +1,88 @@
+
+//User function Template for Java
+
+// class Node  
+// { 
+//     int data; 
+//     Node left, right; 
+   
+//     public Node(int d)  
+//     { 
+//         data = d; 
+//         left = right = null; 
+//     } 
+// }
+
+class Solution
+{
+	ArrayList <Integer> boundary(Node node)
+	{
+	    ArrayList<Integer> res=new ArrayList<>();
+	    if(node==null)
+	    return res;
+	    if(!isLeaf(node))
+	    res.add(node.data);
+	    
+	    addLeft(node,res);
+	    addLeaves(node,res);
+	    addRight(node,res);
+	    return res;
+	    
+	}
+	public void addLeft(Node node,List<Integer> res)
+	{
+	    Node cur=node.left;
+	    while(cur!=null)
+	    {
+	        if(!isLeaf(cur))
+	        res.add(cur.data);
+	        if(cur.left!=null)
+	        cur=cur.left;
+	        else
+	        cur=cur.right;
+	    }
+	    
+	}
+	
+	public void addRight(Node node,List<Integer> res)
+	{
+	    List<Integer> temp=new ArrayList<>();
+	    Node cur=node.right;
+	    while(cur!=null)
+	    {
+	        if(!isLeaf(cur))
+	        temp.add(cur.data);
+	        if(cur.right!=null)
+	        cur=cur.right;
+	        else
+	        cur=cur.left;
+	    }
+	    for(int i=temp.size()-1;i>=0;i--)
+	    {
+	        res.add(temp.get(i));
+	    }
+	    
+	}
+	
+	public void addLeaves(Node node,List<Integer> res)
+	{
+      if(isLeaf(node))
+      {
+      res.add(node.data);
+      return;
+      }
+      if(node.left!=null)
+      addLeaves(node.left,res);
+      if(node.right!=null)
+      addLeaves(node.right,res);
+	}
+	public boolean isLeaf(Node node)
+	{
+	    if(node==null)
+	    return false;
+	    if(node.left==null && node.right==null)
+	    return true;
+	    return false;
+	}
+	
+}
